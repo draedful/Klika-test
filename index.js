@@ -1,5 +1,5 @@
 var app = require('koa')();
-var logger = require('koa-logger')();
+var logger = require('./src/app.logger.js')()//require('koa-logger')();
 var router = require('koa-router')();
 var koaBody = require('koa-body')();
 var json = require('koa-json')();
@@ -7,6 +7,8 @@ var cors = require('kcors')();
 
 var Store = require('./src/storage.js');
 var DB = require('./src/db.js');
+
+
 
 
 router.post('/find', function *(next) {
