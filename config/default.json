@@ -1,0 +1,9 @@
+{
+  "db": {
+    "lifeTimeConnection": 120000
+  },
+  "log_level": {
+    "db": "debug",
+    "app": "debug"
+  }
+}
