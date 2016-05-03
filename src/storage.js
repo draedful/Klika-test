@@ -30,7 +30,7 @@ module.exports = {
             }
             if(helpers.isObject(query.sort)) {
                 for(var name in query.sort) {
-                    if(query.match.hasOwnProperty(name)) {
+                    if(query.sort.hasOwnProperty(name)) {
                         tracks = tracks.sort(name, query.sort[name]);
                     }
                 }
