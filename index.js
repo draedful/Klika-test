@@ -10,6 +10,10 @@ var DB = require('./src/db.js');
 
 
 
+router.get('/', function*(next) {
+    this.body = "Hello world";
+    yield next;
+});
 
 router.post('/find', function *(next) {
     this.body = yield Store.find(this.requestParams);
