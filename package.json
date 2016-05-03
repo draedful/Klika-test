@@ -4,6 +4,7 @@
   "description": "Test app for Klika teck",
   "main": "index.js",
   "dependencies": {
+    "config": "^1.20.1",
     "intel": "^1.1.0",
     "kcors": "^1.2.0",
     "koa": "^1.2.0",
