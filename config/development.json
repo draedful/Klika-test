@@ -1,6 +1,6 @@
 {
     "db": {
-        "host": "localhost/kicka",
+        "host": "localhost/klicka",
         "lifeTimeConnection": 120000
     },
     "log_level": {

@@ -4,9 +4,9 @@ module.exports = dev;
 
 var AppLog = intel.getLogger('app');
 AppLog.setLevel(AppLog.DEBUG);
-//if(process.env.NODE_ENV && process.env.NODE_ENV != 'development') {
-AppLog.addHandler(new intel.handlers.File('log/'+(process.env.NODE_ENV || 'development').toLowerCase()+'.app.log'));
-//}
+if(process.env.NODE_ENV && process.env.NODE_ENV != 'development') {
+    AppLog.addHandler(new intel.handlers.File('log/'+process.env.NODE_ENV.toLowerCase()+'.app.log'));
+}
 
 function dev(opts) {
     return function* logger(next) {
