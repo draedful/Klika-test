@@ -13,7 +13,7 @@ var Tracks = Model.extend({
 module.exports = {
     create: function(params) {
 
-         var track = new Tracks(JSON.parse(params));
+         var track = new Tracks(params);
         return track.save().then(function(resp) {
             return track;
         });
