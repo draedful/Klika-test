@@ -23,10 +23,17 @@ module.exports = {
         if(helpers.isObject(query)) {
             if(helpers.isObject(query.match)) {
                 for(var name in query.match) {
-                    tracks = tracks.where({[name]: new RegExp(query.match[name], 'i')});
+                    if(query.match.hasOwnProperty(name)) {
+                        tracks = tracks.where({[name]: new RegExp(query.match[name], 'i')});
+                    }
                 }
             }
             if(helpers.isObject(query.sort)) {
+                for(var name in query.sort) {
+                    if(query.match.hasOwnProperty(name)) {
+                        tracks = tracks.sort(name, query.sort[name]);
+                    }
+                }
                 tracks = tracks.sort(query.sort);
             }
             if(query.limit) {
