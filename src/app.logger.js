@@ -15,7 +15,7 @@ function dev(opts) {
         var start = process.hrtime();
         yield next;
         var diff = process.hrtime(start);
-        log(date, this.method, this.url,  Math.round((diff[0]*1000) + (diff[1]/1000000)));
+        log(date, this.method, this.url,  this.request.body, Math.round((diff[0]*1000) + (diff[1]/1000000)));
 
         try {
             yield next;
@@ -39,6 +39,6 @@ function dev(opts) {
     }
 }
 
-function log(startDate, method, url, diff) {
-    AppLog.debug('[%s #%s] %s %s - %s', startDate, process.pid, method, url,  diff, 'ms');
+function log(startDate, method, url, params, diff) {
+    AppLog.debug('[%s #%s] %s %s %s - %s', startDate, process.pid, method, url, params ? params : "{}", diff, 'ms');
 }

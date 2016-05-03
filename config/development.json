@@ -1,7 +1,7 @@
 {
     "db": {
         "host": "localhost/klicka",
-        "lifeTimeConnection": 120000
+        "lifeTimeConnection": 1000
     },
     "log_level": {
         "db": "debug",

@@ -20,10 +20,11 @@ module.exports = {
     },
     find(query) {
         var tracks = Tracks;
-        console.log('query');
         if(helpers.isObject(query)) {
             if(helpers.isObject(query.match)) {
-                tracks = tracks.where(query.match);
+                for(var name in query.match) {
+                    tracks = tracks.where({[name]: new RegExp(query.match[name], 'i')});
+                }
             }
             if(helpers.isObject(query.sort)) {
                 tracks = tracks.sort(query.sort);
@@ -37,7 +38,9 @@ module.exports = {
                 tracks = tracks.skip(query.page * (query.limit || LIMIT))
             }
         }
+        console.log('find');
         return tracks.find().then(function(resp) {
+            console.log('find');
             return resp;
         });
     }

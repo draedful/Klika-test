@@ -4,7 +4,6 @@ var router = require('koa-router')();
 var koaBody = require('koa-body')();
 var json = require('koa-json')();
 var cors = require('kcors')();
-
 var Store = require('./src/storage.js');
 var DB = require('./src/db.js');
 
@@ -16,7 +15,9 @@ router.get('/', function*(next) {
 });
 
 router.post('/find', function *(next) {
+    console.log('find');
     this.body = yield Store.find(this.requestParams);
+    console.log('find end');
     yield next;
 });
 
@@ -30,26 +31,21 @@ app
     .use(logger)
     .use(cors)
     .use(json)
-    .use(function* (next) {
-        yield DB.connect();
-        yield next;
-    })
+    .use(DB)
     // parse http parameters
     .use(koaBody)
     .use(function* (next) {
-        try {
-            this.requestParams = JSON.parse(this.request.body);
-        } catch(e) {
-            console.error(e);
+        if(this.request && this.request.body) {
+            try {
+                this.requestParams = JSON.parse(this.request.body);
+            } catch(e) {
+                console.error(e);
+            }
         }
         yield next;
     })
     .use(router.routes())
-    .use(router.allowedMethods())
-    .use(function* (next) {
-        DB.disconnect();
-        yield next;
-    });
+    .use(router.allowedMethods());
 
 
 app.listen(3000);

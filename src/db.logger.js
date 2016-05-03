@@ -8,7 +8,7 @@ if(process.env.NODE_ENV && process.env.NODE_ENV != 'development') {
 
 var Logger = require('mongodb').Logger;
 Logger.setLevel(config.get('log_level.db'));
-Logger.filter('class', ['Cursor']);
+Logger.filter('class', ['Cursor', 'Connection']);
 Logger.setCurrentLogger(function(msg, context) {
     switch(context.type) {
         case 'debug':
