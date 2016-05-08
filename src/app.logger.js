@@ -1,4 +1,6 @@
 var intel = require('intel');
+var v8 = require('v8');
+var pr = require('process');
 
 module.exports = dev;
 
@@ -24,7 +26,7 @@ function dev(opts) {
             AppLog.critical('[%s #%s] %s %s - %s', startDate, process.pid, this.method, this.url, err);
             throw err;
         }
-        var res = this.res;
+        /*var res = this.res;
 
         var onfinish = done.bind(null, 'finish');
         var onclose = done.bind(null, 'close');
@@ -35,10 +37,10 @@ function dev(opts) {
         function done(event){
             res.removeListener('finish', onfinish);
             res.removeListener('close', onclose);
-        }
+        }*/
     }
 }
 
 function log(startDate, method, url, params, diff) {
-    AppLog.debug('[%s #%s] %s %s %s - %s', startDate, process.pid, method, url, params ? params : "{}", diff, 'ms');
+    AppLog.debug('[%s #%s] %s %s %s - %s', startDate, process.pid, method, url, params ? params : "{}", diff, 'ms', v8.getHeapStatistics().used_heap_size/8/1024, process.memoryUsage().heapTotal/8/1024);
 }

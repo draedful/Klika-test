@@ -1,6 +1,7 @@
 var config = require('config');
 var intel = require('intel')
 var log = intel.getLogger('db');
+/*
 log.setLevel(log.DEBUG);
 if(process.env.NODE_ENV && process.env.NODE_ENV != 'development') {
     log.addHandler(new intel.handlers.File('log/'+process.env.NODE_ENV.toLowerCase()+'.db.log'));
@@ -23,4 +24,4 @@ Logger.setCurrentLogger(function(msg, context) {
     }
     return;
     //console.log(context.type.toUpperCase()+' ['+new Date(context.date)+' #'+context.pid + ']' +'[ MongoDB~'+context.className+'] -- : ' + context.message);
-});
+});*/

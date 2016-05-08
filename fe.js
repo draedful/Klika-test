@@ -7,19 +7,19 @@ document.querySelector('#btn').addEventListener('click', function() {
     } catch (e) {
         request.classList.add('invalid');
     }
-
     if(requestString) {
         request.value = JSON.stringify(requestString, null, '  ');
-        find(requestString).then(function (data) {
-            response.textContent = JSON.stringify(data, null, '  ');
-        })
+        for(var i = 100000 ; i>=0 ; i--){
+            find(requestString)
+        }
     }
+
 
 });
 
 function Http(url, params, config) {
     if(url) {
-        return new Promise(function(resolve, reject) {
+        /*return new Promise(function(resolve, reject) {*/
             let xhr = new XMLHttpRequest();
 
             xhr.open(config ? config.method ? config.method : 'GET': 'GET', 'http://localhost:3000/'+url);
@@ -36,24 +36,17 @@ function Http(url, params, config) {
             };
 
             xhr.send(JSON.stringify(params));
-        })
+        /*})*/
     }
-    return Promise.reject('Url is not defined');
+    //return Promise.reject('Url is not defined');
 }
 
 function find (params) {
     return Http('find', params, {method: 'POST'});
 }
 
-window.createServer = function(params, cb) {
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", 'http://localhost:3000/create');
-
-    xhr.onload = function(resp) {
-        cb.call(this);
-    };
-
-    xhr.send(JSON.stringify(params));
+window.createServer = function(params) {
+    return Http('create', params, {method:'POST'});
 };
 
 
