@@ -9,7 +9,7 @@ document.querySelector('#btn').addEventListener('click', function() {
     }
     if(requestString) {
         request.value = JSON.stringify(requestString, null, '  ');
-        for(var i = 100000 ; i>=0 ; i--){
+        for(var i = 100 ; i>=0 ; i--){
             find(requestString)
         }
     }

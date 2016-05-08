@@ -1,0 +1,11 @@
+{
+    "port": 3000,
+    "db": {
+        "host": "172.31.20.119",
+        "lifeTimeConnection": 1000
+    },
+    "log_level": {
+        "db": "debug",
+        "app": "debug"
+    }
+}
