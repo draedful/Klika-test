@@ -20,13 +20,13 @@ const cluster = require('cluster');
 const CPUs = require('os').cpus().length;
 
 if(cluster.isMaster) {
- var threadCount = CPUs * 2;
- for (var i = 0; i < threadCount; i++) {
- cluster.fork();
- }
+     var threadCount = CPUs;
+     for (var i = 0; i < threadCount; i++) {
+     cluster.fork();
+     }
 
- cluster.on('exit', (worker, code, signal) => {
-    console.log(`worker ${worker.process.pid} died`);
+     cluster.on('exit', (worker, code, signal) => {
+        console.log(`worker ${worker.process.pid} died`);
  });
  } else {
 
@@ -55,13 +55,15 @@ if(cluster.isMaster) {
         // parse http parameters
         .use(koaBody)
         .use(function* (next) {
-            if (this.request && this.request.body && typeof this.request.body == "string" ) {
+            if (typeof this.request.body == "string" ) {
                 try {
                     this.requestParams = JSON.parse(this.request.body);
                 } catch (e) {
                     console.error(e);
                 }
-            }
+            } /*else {
+                this.requestParams = this.request.body
+            }*/
             yield next;
         })
         .use(router.routes())
@@ -72,5 +74,11 @@ if(cluster.isMaster) {
     app.context.Store = Store;
     app.context.mongorito = mongorito;
     app.context.dbHost = config.get('db.host');
-    app.listen(config.port)
+    app.listen(config.port);
+    /*DB.DB.connect().then(function() {
+        Store.Tracks.index('author',{});
+        Store.Tracks.index('name',{});
+        Store.Tracks.index('genre',{});
+        Store.Tracks.index('duration',{});
+    });*/
 }

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ab -p postdata -T application/json -c 100 -n 20000 http://localhost:3000/find
+ab -p postdata -T application/json -c 10 -n 1000 -e benchmark.csv http://localhost:3000/find

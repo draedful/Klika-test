@@ -36,6 +36,8 @@ const DB = {
     }, config.get('db.lifeTimeConnection'))
 };
 
+exports.DB = DB;
+
 exports.connect = function* (next) {
 
     yield DB.connect();
