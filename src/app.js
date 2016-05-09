@@ -68,7 +68,7 @@ if(cluster.isMaster) {
         })
         .use(router.routes())
         .use(router.allowedMethods())
-    //.use(DB.disconnect);
+        //.use(DB.disconnect);
 
     app.context.Models = Models;
     app.context.Store = Store;

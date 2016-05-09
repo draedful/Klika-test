@@ -60,18 +60,18 @@ exports.find =  function* (query) {
         }
     }
     if(helpers.isObject(query.sort)) {
-        //var keys = Object.keys(pick(query.sort, ['author', 'name', 'duration', 'genre']));
+        var keys = Object.keys(pick(query.sort, ['author', 'name', 'duration', 'genre']));
 
-        /*for(var i = keys.length; i >= 0 ;i--) {
+        for(var i = keys.length; i >= 0 ;i--) {
             if(query.sort.hasOwnProperty(keys[i])) {
                 tracks = tracks.sort(keys[i], query.sort[keys[i]]);
             }
-        }*/
+        }
 
-        tracks = tracks.sort(pick(query.sort, ['author', 'name', 'duration', 'genre']));
+        //tracks = tracks.sort(pick(query.sort, ['author', 'name', 'duration', 'genre']));
     }
 
-    if(query.limit && query.limit < 100) {
+    if(query.limit /*&& query.limit < 100*/) {
         tracks = tracks.limit(query.limit);
     } else {
         tracks = tracks.limit(LIMIT);
